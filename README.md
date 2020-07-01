@@ -10,7 +10,21 @@ You can run your application in dev mode that enables live coding using:
 ```
 ./mvnw quarkus:dev
 ```
-
+# running from docker
+From main folder of the project you can build the project 
+```
+docker build -t quarkus-native/google-responder -f .\src\main\docker\Dockerfile.multistage .
+```
+than you can run in the port 80 this service with 
+```
+docker run --rm -i -p 80:8080 -t quarkus-native/google-responder
+```
+and you can use jsoup to retrieve the questions like in the checker project
+```
+doc= Jsoup.connect("http://localhost:80/v2/ask/"+question).ignoreContentType(true).get();
+String body=doc.body().text();
+List<QueryResult> queries= Arrays.asList(gson.fromJson(body, QueryResult[].class ));
+```
 ## Packaging and running the application
 
 The application can be packaged using `./mvnw package`.

@@ -19,7 +19,7 @@ than you can run in the port 80 this service with
 ```
 docker run --rm -i -p 80:8080 -t quarkus-native/google-responder
 ```
-and you can use jsoup to retrieve the questions like in the checker project
+and you can use jsoup to retrieve the questions like from an external application, or using postman e.g. http://localhost:80/v2/ask/what is google
 ```
 doc= Jsoup.connect("http://localhost:80/v2/ask/"+question).ignoreContentType(true).get();
 String body=doc.body().text();
